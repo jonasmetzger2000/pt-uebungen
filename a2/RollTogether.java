@@ -2,7 +2,7 @@ import java.util.Random;
 
 /**
  *
- * @author jonas
+ * @author jonas,kerim
  * @version 0.1
  */
 public class RollTogether {

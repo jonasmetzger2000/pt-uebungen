@@ -2,7 +2,7 @@ package iteration;
 
 /**
  * Zeichnet ein Kreuz auf das Sysout. Zwei Parameter steuern die Anzahl von Reihen und Zeilen
- * @author jonas
+ * @author jonas,kerim
  * @version 0.1
  */
 public class Cross {

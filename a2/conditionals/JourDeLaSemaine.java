@@ -2,7 +2,7 @@ package conditionals;
 
 /**
  * Berechnet den lexikalischen Tag mit einen numerischen Tag
- * @author jonas
+ * @author jonas,kerim
  * @version 0.1
  */
 public class JourDeLaSemaine {

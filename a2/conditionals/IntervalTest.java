@@ -2,7 +2,7 @@ package conditionals;
 
 /**
  * Testet ob eine Zahl (arg1) im Intervall [arg2-arg3] liegt.
- * @author jonas
+ * @author jonas,kerim
  * @version 0.1
  */
 public class IntervalTest {

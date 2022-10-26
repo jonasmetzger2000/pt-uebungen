@@ -2,7 +2,7 @@ package iteration;
 
 /**
  * Zeichnet n-Zahlen auf das sout, alle 10 Zahlen (inc. 0) werden durch einen Zeilenumbruch terminiert.
- * @author jonas
+ * @author jonas,kerim
  * @version 0.1
  */
 public class FormattedNumbers {

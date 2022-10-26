@@ -8,7 +8,7 @@ import java.util.Scanner;
  * von Zahlen kann der unterliegende Intervall bestimmt werden. e.g 22->14, 21->13, 55->15. Eingaben niedriger als
  * das Intervallende werden ignoriert. Durch Eingabe von den oberen Intervallende wird das Programm beendet.
  * Alle Eingaben werden durch das Sysin abgefragt.
- * @author jonas
+ * @author jonas,kerim
  * @version 0.1
  */
 public class MapToInterval {
