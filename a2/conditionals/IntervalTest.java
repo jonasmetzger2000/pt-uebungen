@@ -15,9 +15,13 @@ public class IntervalTest {
         int lowerBound = Integer.valueOf(args[1]);
         int upperBound = Integer.valueOf(args[2]);
 
-        if (lowerBound > upperBound) throw new RuntimeException(String.format("not a valid interval upper %s < lower %s", upperBound, lowerBound));
-        if (value > upperBound) throw new RuntimeException(String.format("%s not in [%s,%s] %s > %s", value, lowerBound, upperBound, value, upperBound));
-        if (value < lowerBound) throw new RuntimeException(String.format("%s not in [%s,%s] %s < %s", value, lowerBound, upperBound, value, lowerBound));
+        if (lowerBound > upperBound) {
+            System.err.println(String.format("not a valid interval upper %s < lower %s", upperBound, lowerBound));
+        } else if (value > upperBound) {
+            System.err.println(String.format("%s not in [%s,%s] %s > %s", value, lowerBound, upperBound, value, upperBound));
+        } else if (value < lowerBound) {
+            System.err.println(String.format("%s not in [%s,%s] %s < %s", value, lowerBound, upperBound, value, lowerBound));
+        }
 
         System.out.printf("%s in [%s,%s]%n", value, lowerBound, upperBound);
     }
