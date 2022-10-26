@@ -14,12 +14,12 @@ import java.util.Scanner;
 public class MapToInterval {
 
     public static void main(String... args) {
-        final Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
         System.out.print("Bitte geben sie den lowerBound ein >>");
-        final int lowerBound = scanner.nextInt();
+        int lowerBound = scanner.nextInt();
         System.out.print("Bitte geben sie den upperBound ein >>");
-        final int upperBound = scanner.nextInt();
+        int upperBound = scanner.nextInt();
 
         while (true) {
             System.out.printf("Bitte geben sie eine Zahl >= %s ein >>", lowerBound);
