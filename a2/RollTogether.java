@@ -9,7 +9,7 @@ import java.util.Random;
  */
 public class RollTogether {
 
-    public static final int MAX_ROUNDS = 50;
+    public static final int MAX_POINTS = 50;
     private final Random random = new Random();
     private boolean playerOneDicing = true;
     private int sumPlayerOne = 0;
@@ -19,26 +19,25 @@ public class RollTogether {
         int iteration = 0;
         while (true) {
             if (playerOneDicing)
-                if (sumPlayerOne >= MAX_ROUNDS)
+                if (sumPlayerOne >= MAX_POINTS)
                     continue;
                 else
                     sumPlayerOne += dice();
             else
-                if (sumPlayerTwo >= MAX_ROUNDS)
+                if (sumPlayerTwo >= MAX_POINTS)
                     continue;
                 else
                     sumPlayerTwo += dice();
             System.out.printf("%d:: player1:%d player2:%d%n", ++iteration, sumPlayerOne, sumPlayerTwo);
-            if (sumPlayerOne >= MAX_ROUNDS && sumPlayerTwo >= MAX_ROUNDS)
+            if (sumPlayerOne >= MAX_POINTS && sumPlayerTwo >= MAX_POINTS)
                 break;
         }
     }
 
     public int dice() {
-        if (sumPlayerTwo >= MAX_ROUNDS)
+        if (sumPlayerOne >= MAX_POINTS || sumPlayerTwo >= MAX_POINTS)
             return random.nextInt(5)+1;
-        else if (sumPlayerOne >= MAX_ROUNDS)
-            return random.nextInt(5)+1;
+
         playerOneDicing = !playerOneDicing;
         return random.nextInt(5)+1;
     }
