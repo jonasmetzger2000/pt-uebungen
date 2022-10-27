@@ -19,10 +19,10 @@ public class JourDeLaSemaine {
      * falsche Eingabe -> Неправильный ввод<br>
      */
     public static void main(String... args) {
-        Integer numericDay = Integer.valueOf(args[0]);
+        int numericDay = Integer.parseInt(args[0]);
         if (numericDay <= 0) { System.err.println("Неправильный ввод"); System.exit(1); }
 
-        Integer dayOfWeek = numericDay % 7;
+        int dayOfWeek = numericDay % 7;
 
         System.out.println(switch (dayOfWeek) {
             case 0 -> "Sonntag (Понедельник)";
