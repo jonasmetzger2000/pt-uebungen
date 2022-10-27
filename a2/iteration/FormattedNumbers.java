@@ -15,7 +15,7 @@ public class FormattedNumbers {
         int maxNumber = Integer.parseInt(args[0]);
         for (int i = 0; i < maxNumber; i++) {
             if (i % 10 == 0) System.out.printf("%n");
-            System.out.print(String.format("%s ", i));
+            System.out.printf("%d ", i);
         }
     }
 

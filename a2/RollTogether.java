@@ -9,31 +9,47 @@ import java.util.Random;
  */
 public class RollTogether {
 
-    public static final int MAX_POINTS = 50;
+    public static int MAX_POINTS = 50;
     private final Random random = new Random();
     private boolean playerOneDicing = true;
     private int sumPlayerOne = 0;
     private int sumPlayerTwo = 0;
 
+    /**
+     * Würfelt für den Spieler und gibt deren Status
+     */
     public void rollTogether() {
         int iteration = 0;
-        while (true) {
-            if (playerOneDicing)
-                if (sumPlayerOne >= MAX_POINTS)
-                    continue;
-                else
-                    sumPlayerOne += dice();
-            else
-                if (sumPlayerTwo >= MAX_POINTS)
-                    continue;
-                else
-                    sumPlayerTwo += dice();
-            System.out.printf("%d:: player1:%d player2:%d%n", ++iteration, sumPlayerOne, sumPlayerTwo);
-            if (sumPlayerOne >= MAX_POINTS && sumPlayerTwo >= MAX_POINTS)
-                break;
+        while (sumPlayerOne < MAX_POINTS || sumPlayerTwo < MAX_POINTS) {
+            if (sumPlayerOne < MAX_POINTS) {
+                sumPlayerOne += dice();
+                System.out.printf("%d:: player1:%d player2:%d%n", ++iteration, sumPlayerOne, sumPlayerTwo);
+            }
+            if (sumPlayerTwo < MAX_POINTS) {
+                sumPlayerTwo += dice();
+                System.out.printf("%d:: player1:%d player2:%d%n", ++iteration, sumPlayerOne, sumPlayerTwo);
+            }
+
         }
+        /*
+        	int iteration = 0;
+        while (sumPlayerOne < MAX_POINTS || sumPlayerTwo < MAX_POINTS) {
+            if (playerOneDicing) {
+                if (sumPlayerOne < MAX_POINTS)
+                    sumPlayerOne += dice();
+            } else {
+                if (sumPlayerTwo < MAX_POINTS)
+                    sumPlayerTwo += dice();
+            }
+            System.out.printf("%d:: player1:%d player2:%d%n", ++iteration, sumPlayerOne, sumPlayerTwo);
+        }
+         */
     }
 
+    /**
+     * Würfelt für den Spieler
+     * @return gibt eine zufällige Zahl für einen Spieler aus
+     */
     public int dice() {
         if (sumPlayerOne >= MAX_POINTS || sumPlayerTwo >= MAX_POINTS)
             return random.nextInt(5)+1;

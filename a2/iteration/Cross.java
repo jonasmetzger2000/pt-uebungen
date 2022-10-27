@@ -16,18 +16,18 @@ public class Cross {
         int cols = Integer.parseInt(args[1]);
 
         if (rows % 2 == 0 || cols % 2 == 0) {
-            System.err.println(String.format("%s or %s is even", rows, cols));
-            System.exit(0);
-        }
-        int crossRow = Math.round(rows / 2f);
-        int crossCol = Math.round(cols / 2f);
-        for (int col = 1; col < cols + 1; col++) {
-            for (int row = 1; row < rows + 1; row++) {
-                if (row == crossRow || col == crossCol)
-                    System.out.print("* ");
-                else System.out.print("  ");
+            System.err.printf("%s or %s is even%n", rows, cols);
+        } else {
+            int crossRow = rows/2+1;
+            int crossCol = cols/2+1;
+            for (int col = 1; col < cols + 1; col++) {
+                for (int row = 1; row < rows + 1; row++) {
+                    if (row == crossRow || col == crossCol)
+                        System.out.print("* ");
+                    else System.out.print("  ");
+                }
+                System.out.println();
             }
-            System.out.println();
         }
     }
 }
