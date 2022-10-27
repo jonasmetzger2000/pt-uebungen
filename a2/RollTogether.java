@@ -1,7 +1,9 @@
 import java.util.Random;
 
 /**
- *
+ * Es gibt 2 Spieler, rundenbasiert würfelt jeder Spieler eine Zahl von 1-6. Erreicht ein Spieler die 50 Punkte so
+ * hat er gewonnen. Pro Runde wird der Punktestand ausgegeben. Das Programm beendet sich bis alle Spieler 50 Punkte
+ * erreicht haben.
  * @author jonas,kerim
  * @version 0.1
  */
