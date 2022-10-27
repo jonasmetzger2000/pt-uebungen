@@ -8,6 +8,7 @@ package conditionals;
 public class IntervalTest {
 
     /**
+     * Testet ob eine Zahl (arg1) im Intervall [arg2-arg3] liegt.
      * @param args <strong>[0]:</strong> Integer Zahl. Mit der gegebenen Zahl wird überprüft ob diese im Intervall liegt<br> <strong>[1]:</strong> Integer, unterer Intervall anfang<br> <strong>[2]:</strong> Integer, oberes Intervall ende
      */
     public static void main(String... args) {
@@ -21,8 +22,8 @@ public class IntervalTest {
             System.err.printf("%s not in [%s,%s] %s > %s%n", value, lowerBound, upperBound, value, upperBound);
         } else if (value < lowerBound) {
             System.err.printf("%s not in [%s,%s] %s < %s%n", value, lowerBound, upperBound, value, lowerBound);
+        } else {
+            System.out.printf("%s in [%s,%s]%n", value, lowerBound, upperBound);
         }
-
-        System.out.printf("%s in [%s,%s]%n", value, lowerBound, upperBound);
     }
 }

@@ -8,6 +8,7 @@ package iteration;
 public class Cross {
 
     /**
+     * Zeichnet ein Kreuz auf die Konsole
      * @param args <strong>[0]:</strong> Integer, Anzahl von Reihen<br><strong>[1]:</strong> Integer, Anzahl von Zeilen
      */
     public static void main(String[] args) {

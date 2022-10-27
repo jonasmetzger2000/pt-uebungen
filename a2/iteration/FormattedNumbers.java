@@ -8,6 +8,7 @@ package iteration;
 public class FormattedNumbers {
 
     /**
+     * Zeichnet Zahlen in 10er Spalten, neue Zeile wenn 10 Zeichen Zahle ausgegeben wurden
      * @param args <strong>[0]:</strong> Integer, Anzahl der Zahlen die auf das sysout dargestellt werden sollen
      */
     public static void main(String... args) {

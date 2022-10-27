@@ -8,6 +8,7 @@ package conditionals;
 public class JourDeLaSemaine {
 
     /**
+     * Berechnet den Tag mittels eines Parameters
      * @param args <strong>[0]:</strong> Integer, numerische Zahl aus der der lexikalische Tag berechnet wird<br>
      * Montag -> Понедельник<br>
      * Dienstag -> Вторник<br>
