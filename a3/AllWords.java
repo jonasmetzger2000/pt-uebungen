@@ -11,8 +11,8 @@ public class AllWords {
      *             <strong>args[0]:</strong> string, Satz der nummertiert und seperat ausgegeben wird
      */
     public static void main(String[] args) {
-//        String text = args[0];
-        String text = "go home and feel well";
+        String text = args[0];
+//        String text = "go home and feel well";
 
         int word = 0;
         StringBuilder stringBuilder = new StringBuilder();
