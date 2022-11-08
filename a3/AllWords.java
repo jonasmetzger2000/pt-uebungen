@@ -18,7 +18,7 @@ public class AllWords {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < text.length(); i++) {
             char current = text.charAt(i);
-            if (current != ' ') {
+            if (Character.isWhitespace(current)) {
                 stringBuilder.append(current);
             } else {
                 System.out.printf("%d:%s%n", word++, stringBuilder);
