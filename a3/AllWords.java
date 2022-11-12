@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Nimmt einen gegebenen Satz und gibt alle
  * Wörter nummeriert und seperat aus

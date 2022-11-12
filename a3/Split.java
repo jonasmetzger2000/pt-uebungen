@@ -18,7 +18,7 @@ public class Split {
      *             <strong>args[0]:</strong> string, der Dateiname
      */
     public static void main(String[] args) {
-        String[] fileName = args[0].split(Pattern.quote("."));
+        String[] fileName = args[0].split("\\.");
 
         String name = fileName[0];
         String type = fileName[1];

@@ -12,8 +12,8 @@ public class AllSubstrings {
      *             <strong>args[0]:</strong> string, String deren Potenzmenge gebaut werden soll
      */
     public static void main(String[] args) {
-        String text = args[0];
-//        String text = "go to";
+//        String text = args[0];
+        String text = "abcde";
         for (int i = 0; i < text.length(); i++)
             for (int k = i+1; k < text.length() + 1; k++) {
                 System.out.printf("go to %s-%s:%s%n", i, k, text.substring(i, k));

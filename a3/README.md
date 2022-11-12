@@ -24,7 +24,9 @@
    * `"a".equals("b");`
 6. Warum ist der lexikografische Vergleich in Java für den Aufbau eines Wörterbuches nicht
    geeignet?
-   * Wörter, die mit Großbuchstaben beginnen, sind kleiner als Wörter, die mit Kleinbuchstaben beginnen.
+   1. compareTo funktioniert nicht auf allen Objekte, sondern nur auf Objekte die das Comparable Interface implementieren
+   2. compareTo gibt einen lexikografischen Unterschied aus. Lange Strings verglichen mit kurzen sind problematisch da
+      equals() in diesen Fall direkt false returnt, während 
 7. Schreiben sie eine Methode, die eine Zeichenkette normalisiert.
    * ```java
      class Normalize {

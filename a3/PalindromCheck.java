@@ -22,6 +22,7 @@ public class PalindromCheck {
         for (int i = 0; i < text.length() / 2; i++) {
             if (text.charAt(i) != text.charAt(text.length()-i-1)) {
                 isPalindrom = false;
+                break;
             }
         }
         if (isPalindrom) {

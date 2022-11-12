@@ -10,7 +10,7 @@ public class CharacterPrinter {
      * Endzeichen (<strong>args[1]</strong>) aus. Die Eingabeparameter müssen eine Ganzzahl
      * sein. Die einzelnen Zeichen werden in 10er Gruppen pro Zeile formatiert und durch
      * (zahl):(zeichen) formatiert.
-     * @param args <br>
+     * @param args
      *             <strong>args[0]:</strong> integer, Startzeichen
      *             <strong>args[1]:</strong> integer, Endzeichen
      */
@@ -21,8 +21,8 @@ public class CharacterPrinter {
 
         // print formatted numbers grouped as 10 per line
         for (int i = start; i < end; i++) {
-            if (i % 10 == 0) System.out.printf("%n");
             System.out.printf("%c: %d ", (char)i, i);
+            if ((i-start) % 10 == 9) System.out.printf("%n");
         }
     }
 }

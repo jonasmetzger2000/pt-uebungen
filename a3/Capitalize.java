@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /**
  * Wandelt den ersten Buchstaben eines gegebenen Textes in Großbuchstaben und
  * alle weiteren Buchstaben in Kleinbuchstaben.
@@ -20,7 +22,7 @@ public class Capitalize {
         for (int i = 0; i < textToCapitalize.length(); i++) {
             char current = textToCapitalize.charAt(i);
             // keine leerzeichen ausgeben
-            if (current != ' ') {
+            if (!Character.isWhitespace(current)) {
                 // der erste Buchstabe soll als Großbuchstabe formatiert sein
                 if (i == 0) System.out.print(Character.toUpperCase(current));
                 // der zweite Buchstabe soll als Kleinbuchstabe formatiert sein
