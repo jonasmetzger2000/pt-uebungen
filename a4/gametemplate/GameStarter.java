@@ -12,10 +12,10 @@ public class GameStarter {
      */
     public static void main(String[] args) {
         Game game = Game.getInstance(25);
-        //System.out.printf("game in GameStarte is %s%n",game);
+        for (int i = 0; i < 25; i++) {
+            System.out.printf(" [%3d] ", i+1);
+        }
+        System.out.printf("%n");
         game.loop();
-    }
-
-    private GameStarter() {
     }
 }

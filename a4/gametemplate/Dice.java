@@ -17,6 +17,8 @@ public class Dice {
      * Der Default für die Augen des Würfels
      */
     private int maxPoints;
+    private Random random;
+
     private static int defaultPoints = 6;
 
     /**
@@ -25,6 +27,7 @@ public class Dice {
     public Dice() {
         this(defaultPoints);
         //this.maxPoints=6;
+        random = new Random();
     }
 
     /**
@@ -43,8 +46,18 @@ public class Dice {
      * @return eine Zahl des Intervalls.
      */
     public int roll() {
-        Random rand = new Random();
-        return rand.nextInt(maxPoints)+1;
+        return random.nextInt(maxPoints)+1;
+    }
+
+    /**
+     * Würfelt einen zufälligen GamePiece, 50% GamePiece "one" oder 50% GamePiece "two".
+     * @param one GamePiece nummer eins, 50% Wahrscheinlichkeit das dieser zurückgegeben wird
+     * @param two GamePiece nummer zwei, 50% Wahrscheinlichkeit das dieser zurückgegeben wird
+     * @return Gibt entweder Gamepiece one oder Gamepiece two zurück
+     */
+    public GamePiece choose(GamePiece one, GamePiece two) {
+        if (random.nextInt(2) == 0) return one;
+        else return two;
     }
 
 

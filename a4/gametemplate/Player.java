@@ -1,14 +1,14 @@
 package gametemplate;
 
+import java.util.Random;
+
 /**
  *
- * Die Klasse Player repräsentiert die Beteiligten im Spiel.
- * Player merkt sich Position, Name sowie ein Symbol
- * für die Kurzdarstellung ({@link Player#asSymbol(int position)}).
+ * Die Klasse Player repräsentiert die Mitspieler im Spiel.
+ * Jeder Spieler hat zwei {@link GamePiece}s
  *
- * Player kann sich auf dem Spielfeld fortbewegen ({@link Player#move(Dice)}),
- * darüber entscheiden, wann Player das Spiel gewonnen hat
- * und sich als <code>String</code> darstellen {@link Player#toString()}.
+ * Jede Runde wird zufällig ein {@link GamePiece} ausgelost und
+ * dieser 1-6 Schritte nach vorne bewegt
  *
  * Die Klasse <code>Player</code> bietet eine Reihe öffentlicher
  * Konstanten für die symbolische Darstellung an.
@@ -25,7 +25,9 @@ public class Player {
 
     private String name;
     private String symbol;
-    private int position;
+    private GamePiece one;
+    private GamePiece two;
+    private Random random = new Random();
     /**
      * Der Konstruktor von ({@link Player}). Initialisiert den Namen, das
      * Symbol (für die Spielfelddarstellung) und die initiale Position.
@@ -36,7 +38,8 @@ public class Player {
     public Player(String name,String symbol){
         this.name = name;
         this.symbol =symbol;
-        this.position = 0;
+        one = new GamePiece();
+        two = new GamePiece();
     }
 
      /**
@@ -51,27 +54,31 @@ public class Player {
      * @param dice der Spielwürfel, um die Anzahl der vorzurückenden Positionen zu bestimmen
      * @return new position of player
       */
-    public int move(Dice dice){
-        int forward = dice.roll();
-        if (forward== dice.getMaxPoints()) setBack();
-        position+=forward;
-        return position;
+    public GamePiece move(Dice dice){
+        int targetPosition = Game.getInstance().getTargetPosition();
+        GamePiece chosen;
+        if (one.getPosition() >= Game.getInstance().getTargetPosition()) chosen = two;
+        else if (one.getPosition() >= Game.getInstance().getTargetPosition()) chosen = one;
+        else chosen = dice.choose(one, two);
+        chosen.move(dice.roll());
+        return chosen;
     }
     /**
-     * Prüft, ob sich Player auf der angefragten Position befindet.
+     * Prüft, ob sich Spielsteine auf einen Gamepieces des Spielers befinden
      *
      * @param position die Position, die geprüft werden soll.
-     * @return <code>true</code>, wenn sich Player auf der Position <code>position</code> befindet, sonst <code>false</code>.
+     * @return <code>true</code>, wenn sich ein GamePiece des Player's auf der Position <code>position</code> befindet, sonst <code>false</code>.
      */
     public boolean isOnPosition(int position) {
-        return  this.position == position;
+        return one.isOnPosition(position) || two.isOnPosition(position);
     }
 
     /**
      * Setzt die Position von Player auf <code>0</code>
      */
-    public void setBack(){
-        this.position=0;
+    public void setBack(int newPos){
+        if (one.isOnPosition(newPos)) one.setBack();
+        if (two.isOnPosition(newPos)) two.setBack();
     }
 
     /**
@@ -91,11 +98,12 @@ public class Player {
      * sonst <code>false</code>.
      */
     public boolean hasWon() {
-       return isOnTargetPosition();
+       return bothPiecesAreInTheGoal();
     }
 
-    private boolean isOnTargetPosition(){
-        return this.position >= Game.getInstance().getTargetPosition();
+    private boolean bothPiecesAreInTheGoal(){
+        int goal = Game.getInstance().getTargetPosition();
+        return one.getPosition() >= goal && two.getPosition() >= goal;
     }
 
 
@@ -105,11 +113,9 @@ public class Player {
      *
      * @return ein <code>String</code>
      */
-
-
     @Override
     public String toString() {
-        return String.format("%s [%s,%d] ", name,symbol,position);
+        return String.format("%s [(%s,%d), (%s, %d)]", name,symbol, one.getPosition(), symbol, two.getPosition());
     }
 
 }

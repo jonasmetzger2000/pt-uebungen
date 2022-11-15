@@ -75,9 +75,9 @@ public class Game {
 
         while(!actual.hasWon() && !opponent.hasWon()) {
 
-            int newPosition = actual.move(dice);
-            if (opponent.isOnPosition(newPosition)) {
-                opponent.setBack();
+            GamePiece gamePiece = actual.move(dice);
+            if (opponent.isOnPosition(gamePiece.getPosition())) {
+                gamePiece.setBack();
             }
             printGameState(actual,opponent);
             // Rollentausch actual -> opponent opponent -> actual
@@ -85,7 +85,6 @@ public class Game {
             actual = opponent;
             opponent = temp;
         }
-
     }
 
     /**
@@ -101,7 +100,7 @@ public class Game {
      * @param player2 der zweite der beiden Player
      */
     private void printGameState(Player player1, Player player2) {
-        String format = "%2s";
+        String format = " [ %s ] ";
         for (int pos =0; pos < targetPosition; pos++) {
             if (player1.isOnPosition(pos)) {
                 System.out.printf(format,player1.asSymbol());
