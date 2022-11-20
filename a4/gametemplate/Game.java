@@ -5,10 +5,15 @@ package gametemplate;
  * <p>
  * Die Regeln lauten wie folgt:
  * <ol>
- * <li> Würfelt eine Person die maximale Augenzahl des verwendeten Würfels, dann muss sie zurück zur Startposition.</li>
- * <li> Wenn eine Person mit einem Wurf eine Position erreicht, die bereits belegt ist,
- *      dann muss die Person, die die Position belegt, zurück zur Startposition. </li>
- * <li> Die erste Person, die auf Position <em> targetPosition </em> landet, hat gewonnen.</li>
+ * <li>Jeder Spieler bekommt zwei Spielsteine. Ein Spielstein wird durch die Klasse({@link GamePiece}) representiert</li>
+ * <li>Es wird ein beliebiger Stein gezogen (50% Chance der Auswahl)</li>
+ * <li>Ist der gewählte Stein bereits im Ziel, dann wird mit dem anderen gezogen.</li>
+ * <li>Steine des Player können sich nicht gegenseitig herauswerfen.</li>
+ * <li>Kein Zurücksetzen beim Würfeln der maximalen Augenzahl.</li>
+ * <li>Das Ergebnis der Methode ist die neue Position des gezogenen Steins.</li>
+ * <li>Wenn einer der Steine des Gegners sich auf der Position des letzten gezogenen Steins befindet, dann muss dieser
+ * Stein zurückgesetzt werden.</li>
+ * <li>Wenn einer der Steine auf dem aktuellen Feld steht, dann wird das Symbol des Steins gedruckt.</li>
  * </ol>
  * <p>
  * Die <em> targetPosition </em> kann dem Spiel bei der Erzeugung übergeben werden.
@@ -60,13 +65,16 @@ public class Game {
 
 
     /**
-     * Die {@link Game}-Loop: Erzeugt zwei Player-Objekte sowie den Spielwürfel. Immer ein Spieler ist am Zug
-     * ({@link Player#move(Dice)}). Der andere, der Opponent, wird zurückgesetzt, wenn nach einem Zug sich
-     * beide Player auf dem gleichen Spielfeld befinden.
+     * Die {@link Game}-Loop: Erzeugt zwei Player-Objekte sowie den Spielwürfel. Ein Spieler besitzt 2
+     * Spielsteine. Immer ein Spieler ist am Zug ({@link Player#move(Dice)}).
+     * Spielsteine des Gegner's werden zurückgesetz sofern sich der aktuelle Spieler
+     * auf den Feld des Gegner's befindet.
      * <p>
      * Wenn einer der Player gewonnen hat, wird das Spiel beendet.
      * <p>
-     * Vor jedem Spielzug und am Ende des Spiels wird das Spielfeld mit den Positionen der {@link Player} gedruckt.
+     * Vor jedem Spielzug und am Ende des Spiels wird das Spielfeld mit den Positionen der Spielsteine der Spieler
+     * ausgegeben. Befinden sich zwei Spielsteine des gleichen Spielers auf einen Feld, so werden diese "hintereinander"
+     * stehen und daher wird nur ein Spielstein ausgegeben.
      */
     public void loop() {
         Player actual = new Player("me", Player.BLUE_SPADE);
@@ -77,7 +85,7 @@ public class Game {
 
             GamePiece gamePiece = actual.move(dice);
             if (opponent.isOnPosition(gamePiece.getPosition())) {
-                gamePiece.setBack();
+                opponent.setBack(gamePiece.getPosition());
             }
             printGameState(actual,opponent);
             // Rollentausch actual -> opponent opponent -> actual

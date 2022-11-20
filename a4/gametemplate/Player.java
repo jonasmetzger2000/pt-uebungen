@@ -27,25 +27,27 @@ public class Player {
     private String symbol;
     private GamePiece one;
     private GamePiece two;
-    private Random random = new Random();
+    private int targetPosition;
     /**
-     * Der Konstruktor von ({@link Player}). Initialisiert den Namen, das
-     * Symbol (für die Spielfelddarstellung) und die initiale Position.
+     * Der Konstruktor von ({@link Player}).
+     * Initializisiert den Namen des Spielers, das benutzte Symbol, die zu erreichende Position und
+     * 2 Spielsteine ({@link GamePiece}). Zur
      *
      * @param name Name von Player als String
      * @param symbol symbolische Repräsentation des Player als <code>String</code>
      */
-    public Player(String name,String symbol){
+    public Player(String name, String symbol){
         this.name = name;
-        this.symbol =symbol;
+        this.symbol = symbol;
+        this.targetPosition = Game.getInstance().getTargetPosition();
         one = new GamePiece();
         two = new GamePiece();
     }
 
      /**
-     * Mit dieser Methode bewegt sich ein Player über das Spielfeld, indem
+     * Mit dieser Methode bewegt sich ein Spielsteins des Player (50% Chance) über das Spielfeld, indem
      * die Anzahl der Felder, die weiter vorgerückt werden dürfen, gewürfelt werden.
-     * Dazu wird ein Würfel ({@link Dice}) benutzt, der der Methode übergeben wird,
+     * Dazu wird ein Würfel ({@link Dice}) benutzt, der der Methode übergeben wird
      *
      * Wurde die maximale Punktzahl des Würfels gewürfelt, dann
      * muss Player zurück auf die Startposition ({@link Player#setBack()}). Sonst
@@ -55,16 +57,15 @@ public class Player {
      * @return new position of player
       */
     public GamePiece move(Dice dice){
-        int targetPosition = Game.getInstance().getTargetPosition();
         GamePiece chosen;
-        if (one.getPosition() >= Game.getInstance().getTargetPosition()) chosen = two;
-        else if (one.getPosition() >= Game.getInstance().getTargetPosition()) chosen = one;
+        if (one.getPosition() >= targetPosition) chosen = two;
+        else if (two.getPosition() >= targetPosition) chosen = one;
         else chosen = dice.choose(one, two);
         chosen.move(dice.roll());
         return chosen;
     }
     /**
-     * Prüft, ob sich Spielsteine auf einen Gamepieces des Spielers befinden
+     * Prüft, ob einer der beiden Spielsteine des Spielers auf einer bestimmten Position befindet
      *
      * @param position die Position, die geprüft werden soll.
      * @return <code>true</code>, wenn sich ein GamePiece des Player's auf der Position <code>position</code> befindet, sonst <code>false</code>.
@@ -82,7 +83,7 @@ public class Player {
     }
 
     /**
-     * Die Methode liefert eine symbolische Darstellung von Player.
+     * Die Methode liefert eine symbolische Darstellung des Spielsteins.
      * @return ein <code>String</code>
      */
     public String asSymbol() {
@@ -92,23 +93,16 @@ public class Player {
 
     /**
      * Gibt Auskunft darüber, ob Player das Spiel gewonnen hat.
-     * Das Spiel ist gewonnen, wenn die eigene Position >=
-     * der Zielposition des Spiels ist ({@link Game#getTargetPosition()}).
+     * Das Spiel ist gewonnen, wenn beide Spielsteine >= {@link Player#targetPosition} liegt.
      * @return <code>true</code>, wenn die Position >= der Zielposition des Spiels ist,
      * sonst <code>false</code>.
      */
     public boolean hasWon() {
-       return bothPiecesAreInTheGoal();
+        return one.getPosition() >= targetPosition && two.getPosition() >= targetPosition;
     }
-
-    private boolean bothPiecesAreInTheGoal(){
-        int goal = Game.getInstance().getTargetPosition();
-        return one.getPosition() >= goal && two.getPosition() >= goal;
-    }
-
 
     /**
-     * Bereitet den Zustand/die Eigenschaftswerte von Player als Zeichenkette auf.
+     * Bereitet den Zustand/die Eigenschaftswerte von den 2 Spielsteinen des Players als Zeichenkette auf.
      * Dazu gehören der Name, das Symbol sowie die aktuelle Position.
      *
      * @return ein <code>String</code>

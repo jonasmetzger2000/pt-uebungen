@@ -1,5 +1,9 @@
 package gametemplate;
 
+/**
+ * Repräsentiert ein Spielstein eines ({@link Player}). Der Spielstein kann sich nach vorne bewegen.
+ * und gibt daraufhin seine Position preis. Die Position eines Spielstein kann auch zurückgesetzt werden
+ */
 public class GamePiece {
 
     private int position = 0;
@@ -18,14 +22,26 @@ public class GamePiece {
         return position;
     }
 
+    /**
+     * Gibt die aktuelle Position des Spielsteins zurück
+     * @return die aktuelle Position des Spielsteins
+     */
     public int getPosition() {
         return position;
     }
 
+    /**
+     * Überprüft ob der Spielstein auf einer gegebenen Position liegt.
+     * @param position abzufragende Position des Spielsteins
+     * @return return <i>true</i> wenn Spielstein auf Position, ansonsten <i>false</i>
+     */
     public boolean isOnPosition(int position) {
         return this.position == position;
     }
 
+    /**
+     * Setzt die Position des Spielsteins wieder zurück auf 0
+     */
     public void setBack() {
         position = 0;
     }
