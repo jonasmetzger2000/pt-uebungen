@@ -97,7 +97,7 @@ public class Matrix {
         int max = 0;
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
-                int current = get(row, col);
+                int current = String.valueOf(get(row, col)).length()+1;
                 if (current > max)
                     max = current;
             }
@@ -109,7 +109,7 @@ public class Matrix {
     public String toString() {
         for (int row = 0; row < array.length; row++) {
             for (int col = 0; col < array[row].length; col++) {
-                System.out.printf("%d", array[row][col]);
+                System.out.printf("%" + maxElemSpace() + "d", array[row][col]);
             }
             System.out.println();
         }
