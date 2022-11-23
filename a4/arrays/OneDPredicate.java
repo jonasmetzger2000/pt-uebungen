@@ -2,11 +2,17 @@ package arrays;
 
 import javax.naming.PartialResultException;
 
+/**
+ * Beinhaltet die Aufgaben C für Prädikate der eindimensionalen Arrays
+ */
 public class OneDPredicate {
 
-    private OneDPredicate() {
-    }
-
+    /**
+     * Vergleicht Element zu Element von zwei gegebenen Zahlenreihen ob diese ein Vielfaches sind
+     * @param ary1 
+     * @param ary2
+     * @return
+     */
     public static boolean isMultiple(int[] ary1, int[] ary2) {
         for (int i = 0; i < ary1.length; i++) {
             int left = ary1[i];
