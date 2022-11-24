@@ -37,7 +37,7 @@ public class OneDPredicate {
 
     /**
      * Überprüft ob irgendein Element die gleich Länge besitzt
-     * @param ary zu überprüfendes Array
+     * @param ary zu überprüfendes Array(nicht null)
      * @param length zu suchende Lönge
      * @return wenn länge gefunden, true ansonsten false
      */

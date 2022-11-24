@@ -22,6 +22,7 @@ public class Matrix {
     }
 
     private boolean is2D(int[][] ary){
+        if (ary == null) return false;
         for (int[] inner : ary)
             if (inner == null) return false;
         return true;
@@ -51,7 +52,7 @@ public class Matrix {
      * @return wenn kopiervorgang erfolgreich true, ansonsten false
      */
     public boolean copyFrom(int[][] ary2D){
-        if (ary2D == null || !is2D(ary2D)) return false;
+        if (!is2D(ary2D)) return false;
 
         for (int row = 0; row < rows; row++) {
             if (ary2D.length <= row) continue;
