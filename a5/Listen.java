@@ -14,8 +14,8 @@ public class Listen {
 
     public static List<Integer> collectAllIndices(List<String> ls, String elem) {
         List<Integer> indices = new ArrayList<>();
-        for(int i=0; i<ls.size();i++){  //size gibt die Länge der Liste wieder
-            String vergleich = ls.get(i); //get holt den aktuellen i und weist es vergleich zu
+        for(int i=0; i<ls.size();i++){
+            String vergleich = ls.get(i);
             if(elem.equals(vergleich)){
                 indices.add(i);
             }
@@ -56,20 +56,57 @@ public class Listen {
         System.out.println(lo);
     }
 
-    public static void removeX(List<Object> lo, int start, int end) {
+    public static void removeXRL(List <Object> lo, int start, int end) {
+        int startPoint = start;
 
+        while (startPoint < end){
+            Iterator<Object> removeIterator = lo.listIterator(start);
+            removeIterator.next();
+            removeIterator.remove();
+            startPoint++;
+        }
+        System.out.println(lo);
     }
+    public static void removeXLR (List <Object> lo, int start, int end){
+        int endPoint = end;
 
+        while (endPoint > start){
+            ListIterator<Object> removeIterator = lo.listIterator(end-1);
+            removeIterator.previous();
+            removeIterator.remove();
+            endPoint--;
+        }
+        System.out.println(lo);
+    }
     public static boolean hasNoDuplicates(List<Object> lo) {
-        return false;
+
+        return new HashSet<>(lo).size() == lo.size();
     }
 
     public static List<Object> collectDuplicates(List<Object> lo) {
-        return null;
+        List<Object> copyOfList = new ArrayList<Object>(lo);
+        for (Object i : copyOfList) {
+            for(Object a : lo){
+                if(lo.get((Integer) i).equals(a)){
+                    copyOfList.remove(i);
+                }
+            }
+        }
+        return copyOfList;
     }
 
     public static List<List<Object>> inPairs(List<Object> lo) {
-        return null;
+        List<List<Object>>inPairs = new ArrayList<>();
+        if (lo.size() % 2 != 0) {
+            return null;
+        } else {
+            for (int i = 0; i < lo.size(); i+=2) {
+                List<Object> storeElem = new ArrayList<>();
+                storeElem.add(lo.get(i));
+                storeElem.add(lo.get(i+1));
+                inPairs.add(storeElem);
+            }
+        }
+        return inPairs;
     }
-
 }
