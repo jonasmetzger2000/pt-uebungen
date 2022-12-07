@@ -60,7 +60,7 @@ public class EvenNumberReference {
     /**
      * Überprüft ob das gegebene Objekt gleich dem aktuellen ist.
      * @param obj zu überprüfendes Objekt
-     * @return
+     * @return true wenn Nummer gleich
      */
     @Override
     public boolean equals(Object obj) {
