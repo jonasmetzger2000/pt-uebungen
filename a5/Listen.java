@@ -62,7 +62,7 @@ public class Listen {
         System.out.println(lo);
     }
 
-    public static void removeXRL(List <Object> lo, int start, int end) {
+    public static void removeRL(List <Object> lo, int start, int end) {
         int startPoint = start;
 
         while (startPoint < end){
@@ -73,7 +73,7 @@ public class Listen {
         }
         System.out.println(lo);
     }
-    public static void removeXLR (List <Object> lo, int start, int end){
+    public static void removeLR (List <Object> lo, int start, int end){
         int endPoint = end;
         ListIterator<Object> removeIterator = lo.listIterator(end-1);
 

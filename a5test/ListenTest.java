@@ -112,7 +112,7 @@ public class ListenTest {
                 8
         );
 
-        Listen.removeXRL(collection, 1, 6);
+        Listen.removeRL(collection, 1, 6);
         assertEquals(List.of(1, 8), collection);
     }
 
@@ -129,7 +129,7 @@ public class ListenTest {
                 8
         );
 
-        Listen.removeXLR(collection, 1, 6);
+        Listen.removeLR(collection, 1, 6);
         assertEquals(List.of(1, 8), collection);
     }
 
