@@ -91,15 +91,15 @@ public class Listen {
     }
 
     public static List<Object> collectDuplicates(List<Object> lo) {
-        List<Object> copyOfList = new ArrayList<Object>(lo);
-        for (Object i : copyOfList) {
+        List<Object> duplicateList = new ArrayList<Object>(lo);
+        for (Object i : duplicateList) {
             for(Object a : lo){
-                if(lo.get((Integer) i).equals(a)){
-                    copyOfList.remove(i);
+                if(lo.get((Integer)i).equals(a)){
+                    duplicateList.remove(i);
                 }
             }
         }
-        return copyOfList;
+        return duplicateList;
     }
 
     public static List<List<Object>> inPairs(List<Object> lo) {
