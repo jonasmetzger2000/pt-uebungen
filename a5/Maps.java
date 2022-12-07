@@ -99,6 +99,7 @@ public class Maps {
         while (iterator.hasNext()) {
             Object key = iterator.next();
             Map<Object, Object> inner;
+            // Wenn eine nested map bereits existiert, append 2. & 3. Element an das bestehende
             if (nestedMap.containsKey(key)) {
                 inner = nestedMap.get(key);
             } else {
