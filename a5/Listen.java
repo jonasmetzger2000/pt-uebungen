@@ -3,6 +3,11 @@ import java.util.*;
 
 public class Listen {
 
+    /**
+     * Bildet eine Schnittmenge über die Ansammlungen von List-Collections
+     * @param colOfIntegerCols geschachtelte Collection eines Integers, über welche eine Schnittmenge gebildet werden soll
+     * @return Das Ergebnis der Schnittmenge
+     */
     public static List<Integer> intersectAll(Collection<Collection<Integer>> colOfIntegerCols) {
         Iterator<Collection<Integer>> iterator = colOfIntegerCols.iterator();
         List<Integer> intersection = new ArrayList<>(iterator.next());
@@ -11,7 +16,12 @@ public class Listen {
         }
         return intersection;
     }
-
+    /**
+     * Sammelt alle Indices bzw. Vorkommen des Strings "elem" in einer Liste
+     * @param ls Liste mit Vorkommen
+     * @param elem Element, von der die Vorkommen bestimmt werden sollen
+     * @return indices eine Liste von Indices der Vorkommen von elem
+     */
     public static List<Integer> collectAllIndices(List<String> ls, String elem) {
         List<Integer> indices = new ArrayList<>();
         for(int i=0; i<ls.size();i++){
@@ -21,7 +31,10 @@ public class Listen {
         }
         return indices;
     }
-
+    /**
+     * Gibt die gegenüberliegenden Elemente der Liste aus
+     * @param li auszugebende Liste
+     */
     public static void printOpposites(List<Integer> li) {
         if(li.size() % 2 != 0){
             System.out.println("Uneven List");
@@ -33,8 +46,12 @@ public class Listen {
             }
         }
     }
-
-
+    /**
+     * Überprüft, ob li1 eine echte Obermenge von li2 ist
+     * @param li1 Liste mit Elementen
+     * @param li2 Liste mit Elementen
+     * @return Wenn li1 eine echte Obermenge von li2 ist true, ansonsten false
+     */
     public static boolean isProperSuperset(List<Integer> li1, List<Integer> li2) {
         Set<Integer> se1 = new HashSet<>(li1);
         Set<Integer> se2 = new HashSet<>(li2);
@@ -42,7 +59,11 @@ public class Listen {
             return true;
         }else return false;
     }
-
+    /**
+     * Entfernt alle Vorkommen von Objekten in der gegebenen Liste
+     * @param lo Liste mit zu entfernenden Elementen
+     * @param o zu entfernendes Element
+     */
     public static void removeAll(List<Object> lo, Object o) {
         Iterator<Object> objectIterator = lo.iterator();
             while(objectIterator.hasNext()){
@@ -53,7 +74,12 @@ public class Listen {
             }
         System.out.println(lo);
     }
-
+    /**
+     * Entfernt alle Elemente von einem Index zu einem anderen Index. Dabei werden von rechts nach Links die Elemente gelöscht
+     * @param lo Liste, von der Elemente gelöscht werden sollen
+     * @param start Index, ab dem das Löschen beginnen soll
+     * @param end Index, bis zu welcher Position das Löschen stoppen soll
+     */
     public static void removeRL(List <Object> lo, int start, int end) {
         int startPoint = start;
 
@@ -65,6 +91,12 @@ public class Listen {
         }
         System.out.println(lo);
     }
+    /**
+     * Entfernt alle Elemente von einem Index zu einem anderen Index. Dabei wird von links nach rechts gelöscht
+     * @param lo Liste, von der Elemente gelöscht werden sollen
+     * @param start Index, ab dem das Löschen beginnen soll
+     * @param end Index, bis zu welcher Position das Löschen stoppen soll
+     */
     public static void removeLR (List <Object> lo, int start, int end){
         int endPoint = end;
         ListIterator<Object> removeIterator = lo.listIterator(end-1);
@@ -76,10 +108,19 @@ public class Listen {
         }
         System.out.println(lo);
     }
+    /**
+     * Überprüft, ob in der gegebenen Liste Duplikate vorhanden sind
+     * @param lo Zu überprüfende Liste
+     * @return true, wenn Liste keine Duplikate enthält, ansonsten false
+     */
     public static boolean hasNoDuplicates(List<Object> lo) {
         return new HashSet<>(lo).size() == lo.size();
     }
-
+    /**
+     * Sammelt alle Duplikate (einzigartig) in einer Liste
+     * @param lo Liste von welcher die Duplikate gesammelt werden sollen
+     * @return Liste welche nur die Duplikate enthält
+     */
     public static List<Object> collectDuplicates(List<Object> lo) {
         List<Object> duplicateList = new ArrayList<Object>(lo);
         for (Object i : duplicateList) {
@@ -91,7 +132,12 @@ public class Listen {
         }
         return duplicateList;
     }
-
+    /**
+     * Sammelt die gegebenene Liste in eine Liste von Paaren. Die Paare selber werden als Liste representiert.
+     * Wenn die gegebenene Liste eine ungrade Anzahl von Elementen enthält, gibt die Methode null zurück
+     * @param lo Liste welche in Paare gruppiert werden sollen
+     * @return die paarweise Liste von Paaren
+     */
     public static List<List<Object>> inPairs(List<Object> lo) {
         List<List<Object>>inPairs = new ArrayList<>();
         if (lo.size() % 2 != 0) {
