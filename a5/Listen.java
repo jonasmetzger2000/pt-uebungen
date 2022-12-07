@@ -5,11 +5,11 @@ public class Listen {
 
     public static List<Integer> intersectAll(Collection<Collection<Integer>> colOfIntegerCols) {
         Iterator<Collection<Integer>> iterator = colOfIntegerCols.iterator();
-        Collection<Integer> first = iterator.next();
+        List<Integer> intersection = new ArrayList<>(iterator.next());
         while (iterator.hasNext()) {
-            first.retainAll(iterator.next());
+            intersection.retainAll(iterator.next());
         }
-        return (List<Integer>) first;
+        return intersection;
     }
 
     public static List<Integer> collectAllIndices(List<String> ls, String elem) {
