@@ -36,13 +36,20 @@ public class Listen {
         }
     }
 
-    public static boolean isProperSuperset(List<Integer> li1, List<Integer> li2) {
+    /*public static boolean isProperSuperset(List<Integer> li1, List<Integer> li2) {
         for(int i :li2){
             if(!li1.contains(li2) || li2.size()>=li1.size()){
                 return false;
             }
-        }
-        return true;
+        }return true;
+    }*/
+    public static boolean isProperSuperset(List<Integer> li1, List<Integer> li2) {
+        Set<Integer> se1 = new HashSet<>(li1);
+        Set<Integer> se2 = new HashSet<>(li2);
+        if (se1.size() > se2.size() && se1.containsAll(se2)){
+            return true;
+        }else return false;
+        //return (se1.size() > se2.size() && se1.containsAll(se2));
     }
 
     public static void removeAll(List<Object> lo, Object o) {
