@@ -24,8 +24,7 @@ public class Listen {
     }
 
     public static void printOpposites(List<Integer> li) {
-
-        if(li.size()%2!=0){
+        if(li.size() % 2 != 0){
             System.out.println("Uneven List");
         } else{
             for(int i=0; i<li.size()/2 ;i++){
@@ -76,9 +75,9 @@ public class Listen {
     }
     public static void removeXLR (List <Object> lo, int start, int end){
         int endPoint = end;
+        ListIterator<Object> removeIterator = lo.listIterator(end-1);
 
         while (endPoint > start){
-            ListIterator<Object> removeIterator = lo.listIterator(end-1);
             removeIterator.previous();
             removeIterator.remove();
             endPoint--;
@@ -86,7 +85,6 @@ public class Listen {
         System.out.println(lo);
     }
     public static boolean hasNoDuplicates(List<Object> lo) {
-
         return new HashSet<>(lo).size() == lo.size();
     }
 
