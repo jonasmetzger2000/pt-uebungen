@@ -10,12 +10,8 @@ public class Maps {
     public static Map<Object,Integer> frequencyMap(List<Object> lo) {
         Map<Object, Integer> frequencyMap = new HashMap<>();
         for (Object obj : lo) {
-//            frequencyMap.merge(obj, 1, Integer::sum);
-            if (frequencyMap.containsKey(obj)) {
-                frequencyMap.put(obj, frequencyMap.get(obj) + 1);
-            } else {
-                frequencyMap.put(obj, 1);
-            }
+            frequencyMap.putIfAbsent(obj, 0);
+            frequencyMap.put(obj, frequencyMap.get(obj) + 1);
         }
         return frequencyMap;
     }
@@ -27,11 +23,10 @@ public class Maps {
      * @return wenn die summe von den schlüssel wert paaren kleiner als nummer ist true, ansonsten false
      */
     public static boolean allKeyValSumLower(Map<Double,Double> mnn, long num) {
-        double sum = 0;
         for (Map.Entry<Double, Double> entry : mnn.entrySet()) {
-            sum += (entry.getKey() + entry.getValue());
+            if (entry.getKey() + entry.getValue() >= num) return false;
         }
-        return sum < num;
+        return true;
     }
 
     /**
@@ -119,7 +114,7 @@ public class Maps {
     public static Map<Double,Double> mapToSqrt(Map<Double,Double> mdd) {
         Map<Double, Double> sqrtMap = new HashMap<>();
         for (Map.Entry<Double, Double> entry : mdd.entrySet()) {
-            sqrtMap.put(Math.sqrt(entry.getKey()), Math.sqrt(entry.getValue()));
+            sqrtMap.put(entry.getKey(), Math.sqrt(entry.getValue()));
         }
         return sqrtMap;
     }

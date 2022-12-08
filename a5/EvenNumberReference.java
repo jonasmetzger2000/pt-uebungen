@@ -1,16 +1,19 @@
+import java.util.Objects;
+
 /**
  * Bildet eine Ganzzahlige Zahl ab. Erlaubt diverse arithmetische Operationen wie z.B Addition
  * oder subtraktion.
  */
 public class EvenNumberReference {
 
+    private static final int DEFAULT_NUMBER = 10;
     private int number;
 
     /**
      * Erzeugt eine EvenNumberReference Instanz mit den Default Wert "10"
      */
     public EvenNumberReference() {
-        this(10);
+        this(DEFAULT_NUMBER);
     }
 
     /**
@@ -25,7 +28,7 @@ public class EvenNumberReference {
      * Gibt die aktuell representierende Zahl zurück
      * @return zahl
      */
-    public int getNumber() {
+    private int getNumber() {
         return number;
     }
 
@@ -42,7 +45,7 @@ public class EvenNumberReference {
      * @param number zu summierende Zahl
      */
     public void add(EvenNumberReference number) {
-        this.number = ensureEvenNumber(getNumber() + number.getNumber());
+        this.number = this.number + number.getNumber();
     }
 
     /**
@@ -50,26 +53,23 @@ public class EvenNumberReference {
      * @param number zu subtrahierende Zahl
      */
     public void sub(EvenNumberReference number) {
-        this.number = ensureEvenNumber(getNumber() - number.getNumber());
+        this.number = this.number - number.getNumber();
     }
 
     private int ensureEvenNumber(int number) {
         return number * 2;
     }
 
-    /**
-     * Überprüft ob das gegebene Objekt gleich dem aktuellen ist.
-     * @param obj zu überprüfendes Objekt
-     * @return true wenn Nummer gleich
-     */
+   /**
+    * Bechnet einen einzigartigen HashCode auf grundlage der aktuellen Zahl
+    * @return einzigartiger Wert
+    */
     @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof EvenNumberReference) {
-            if (((EvenNumberReference) obj).getNumber() == getNumber()) {
-                return true;
-            }
-        }
-        return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EvenNumberReference that = (EvenNumberReference) o;
+        return number == that.number;
     }
 
     /**
@@ -78,7 +78,7 @@ public class EvenNumberReference {
      */
     @Override
     public int hashCode() {
-        return Integer.hashCode(getNumber());
+        return Objects.hash(number);
     }
 
     /**

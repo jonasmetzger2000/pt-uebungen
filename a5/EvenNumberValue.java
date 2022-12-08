@@ -25,7 +25,7 @@ public class EvenNumberValue {
      * Gibt die aktuell representierende Zahl zurück
      * @return zahl
      */
-    public int getNumber() {
+    private  int getNumber() {
         return number;
     }
 
@@ -44,7 +44,7 @@ public class EvenNumberValue {
      * @return die neu erstellte Number
      */
     public EvenNumberValue add(EvenNumberValue number) {
-        return new EvenNumberValue(ensureEvenNumber(number.getNumber() + getNumber()));
+        return new EvenNumberValue(number.getNumber() + getNumber());
     }
 
     /**
@@ -53,7 +53,7 @@ public class EvenNumberValue {
      * @return die neu erstellte Number
      */
     public EvenNumberValue sub(EvenNumberValue number) {
-        return new EvenNumberValue(ensureEvenNumber(number.getNumber() - getNumber()));
+        return new EvenNumberValue(number.getNumber() - getNumber());
     }
 
     private int ensureEvenNumber(int number) {

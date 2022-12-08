@@ -17,17 +17,6 @@ public class Listen {
         }
         return intersection;
     }
-    /*public static List<Integer> intersectAll(Collection<Collection<Integer>> colOfIntegerCols) {
-        List<Integer> intersection = new ArrayList<>();
-        boolean firstcollection = true;
-        for (Collection<Integer> collection : colOfIntegerCols) {
-            if (firstcollection) {
-                intersection.addAll(collection); //MassenMethode zum Hinzufügen des Parameters
-                intersection.retainAll(collection); //Methode zum Bilden von Schnittmenge
-            }
-        }
-        return intersection;
-    }*/
 
     /**
      * Sammelt alle Indices bzw. Vorkommen des Strings "elem" in einer Liste
@@ -69,9 +58,7 @@ public class Listen {
     public static boolean isProperSuperset(List<Integer> li1, List<Integer> li2) {
         Set<Integer> se1 = new HashSet<>(li1);
         Set<Integer> se2 = new HashSet<>(li2);
-        if (se1.size() > se2.size() && se1.containsAll(se2)){
-            return true;
-        }else return false;
+        return  (se1.size() > se2.size() && se1.containsAll(se2));
     }
 
     /**
@@ -87,7 +74,7 @@ public class Listen {
                     objectIterator.remove();
                 }
             }
-        System.out.println(lo);
+        //System.out.println(lo);
     }
     /**
      * Entfernt alle Elemente von einem Index zu einem anderen Index. Dabei werden von rechts nach Links die Elemente gelöscht
@@ -104,7 +91,6 @@ public class Listen {
             removeIterator.remove();
             startPoint++;
         }
-        System.out.println(lo);
     }
     /**
      * Entfernt alle Elemente von einem Index zu einem anderen Index. Dabei wird von links nach rechts gelöscht
@@ -121,7 +107,6 @@ public class Listen {
             removeIterator.remove();
             endPoint--;
         }
-        System.out.println(lo);
     }
     /**
      * Überprüft, ob in der gegebenen Liste Duplikate vorhanden sind
