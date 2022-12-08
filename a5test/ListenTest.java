@@ -100,23 +100,6 @@ public class ListenTest {
     }
 
     @Test
-    void removeRLTest() {
-        List<Object> collection = collection(
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8
-        );
-
-        Listen.removeRL(collection, 1, 6);
-        assertEquals(List.of(1, 8), collection);
-    }
-
-    @Test
     void removeLRTest() {
         List<Object> collection = collection(
                 1,
@@ -130,6 +113,23 @@ public class ListenTest {
         );
 
         Listen.removeLR(collection, 1, 6);
+        assertEquals(List.of(1, 8), collection);
+    }
+
+    @Test
+    void removeRLTest() {
+        List<Object> collection = collection(
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8
+        );
+
+        Listen.removeRL(collection, 1, 6);
         assertEquals(List.of(1, 8), collection);
     }
 

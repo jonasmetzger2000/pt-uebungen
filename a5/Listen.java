@@ -8,6 +8,7 @@ public class Listen {
      * @param colOfIntegerCols geschachtelte Collection eines Integers, über welche eine Schnittmenge gebildet werden soll
      * @return Das Ergebnis der Schnittmenge
      */
+
     public static List<Integer> intersectAll(Collection<Collection<Integer>> colOfIntegerCols) {
         Iterator<Collection<Integer>> iterator = colOfIntegerCols.iterator();
         List<Integer> intersection = new ArrayList<>(iterator.next());
@@ -16,6 +17,18 @@ public class Listen {
         }
         return intersection;
     }
+    /*public static List<Integer> intersectAll(Collection<Collection<Integer>> colOfIntegerCols) {
+        List<Integer> intersection = new ArrayList<>();
+        boolean firstcollection = true;
+        for (Collection<Integer> collection : colOfIntegerCols) {
+            if (firstcollection) {
+                intersection.addAll(collection); //MassenMethode zum Hinzufügen des Parameters
+                intersection.retainAll(collection); //Methode zum Bilden von Schnittmenge
+            }
+        }
+        return intersection;
+    }*/
+
     /**
      * Sammelt alle Indices bzw. Vorkommen des Strings "elem" in einer Liste
      * @param ls Liste mit Vorkommen
@@ -25,12 +38,13 @@ public class Listen {
     public static List<Integer> collectAllIndices(List<String> ls, String elem) {
         List<Integer> indices = new ArrayList<>();
         for(int i=0; i<ls.size();i++){
-            if(elem.equals(ls.get(i))){
+            if(ls.get(i).equals(elem)){
                 indices.add(i);
             }
         }
         return indices;
     }
+
     /**
      * Gibt die gegenüberliegenden Elemente der Liste aus
      * @param li auszugebende Liste
@@ -59,6 +73,7 @@ public class Listen {
             return true;
         }else return false;
     }
+
     /**
      * Entfernt alle Vorkommen von Objekten in der gegebenen Liste
      * @param lo Liste mit zu entfernenden Elementen
@@ -80,10 +95,10 @@ public class Listen {
      * @param start Index, ab dem das Löschen beginnen soll
      * @param end Index, bis zu welcher Position das Löschen stoppen soll
      */
-    public static void removeRL(List <Object> lo, int start, int end) {
+    public static void removeLR(List <Object> lo, int start, int end) {
         int startPoint = start;
 
-        while (startPoint < end){
+        while (startPoint <= end){
             Iterator<Object> removeIterator = lo.listIterator(start);
             removeIterator.next();
             removeIterator.remove();
@@ -97,11 +112,11 @@ public class Listen {
      * @param start Index, ab dem das Löschen beginnen soll
      * @param end Index, bis zu welcher Position das Löschen stoppen soll
      */
-    public static void removeLR (List <Object> lo, int start, int end){
+    public static void removeRL (List <Object> lo, int start, int end){
         int endPoint = end;
-        ListIterator<Object> removeIterator = lo.listIterator(end-1);
+        ListIterator<Object> removeIterator = lo.listIterator(end+1);
 
-        while (endPoint > start){
+        while (endPoint >= start){
             removeIterator.previous();
             removeIterator.remove();
             endPoint--;
@@ -121,17 +136,22 @@ public class Listen {
      * @param lo Liste von welcher die Duplikate gesammelt werden sollen
      * @return Liste welche nur die Duplikate enthält
      */
+
     public static List<Object> collectDuplicates(List<Object> lo) {
-        List<Object> duplicateList = new ArrayList<Object>(lo);
-        for (Object i : duplicateList) {
-            for(Object a : lo){
-                if(lo.get((Integer)i).equals(a)){
-                    duplicateList.remove(i);
+        List<Object> duplicates = new ArrayList<>();
+        Set<Object> knownObjects = new HashSet<>();
+
+        for (Object i : lo) {
+            if (knownObjects.contains(i)) {
+                if (!duplicates.contains(i)) {
+                    duplicates.add(i);
                 }
             }
+            knownObjects.add(i);
         }
-        return duplicateList;
+        return duplicates;
     }
+
     /**
      * Sammelt die gegebenene Liste in eine Liste von Paaren. Die Paare selber werden als Liste representiert.
      * Wenn die gegebenene Liste eine ungrade Anzahl von Elementen enthält, gibt die Methode null zurück
