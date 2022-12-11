@@ -7,8 +7,11 @@
       <sourceFolder url="file://$MODULE_DIR$/a2" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/a3" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/a4" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/a5" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/a5test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/a5/main" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/a5/test" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/a6/main" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/a6/test" isTestSource="true" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

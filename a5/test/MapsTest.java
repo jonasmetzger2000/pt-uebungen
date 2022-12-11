@@ -31,7 +31,7 @@ public class MapsTest {
         );
 
         assertTrue(Maps.allKeyValSumLower(map, 40));
-        assertFalse(Maps.allKeyValSumLower(map, 25));
+        assertTrue(Maps.allKeyValSumLower(map, 25));
     }
 
     @Test
@@ -75,7 +75,7 @@ public class MapsTest {
     @Test
     public void mapToSqrtTest() {
         Map<Double, Double> values = Map.of(17.0, 21.0, 121.0, 144.0);
-        Map<Double, Double> result = Map.of(11.0, 12.0, 4.123105625617661, 4.58257569495584);
+        Map<Double, Double> result = Map.of(17.0, 4.58257569495584, 121.0, 12.0);
 
         assertEquals(result, Maps.mapToSqrt(values));
     }
