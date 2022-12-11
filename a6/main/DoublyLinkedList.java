@@ -163,7 +163,7 @@ public class DoublyLinkedList {
     }
 
     private Node getNodeAt(int index) {
-        if (!(0 <= index && index < n)) throw new IndexOutOfBoundsException("Illegal index");
+        if (!(0 <= index && index < n)) throw new IndexOutOfBoundsException(String.format("Invalid Index %d for List with size %d", index, n));
         Node current = head;
         int currentIndex = 0;
         while (Objects.nonNull(current)) {
