@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -26,6 +27,9 @@ class DoublyLinkedListTest {
     void size() {
         assertEquals(0, EMPTY.size());
         assertEquals(3, WITH_STRINGS.size());
+
+        WITH_STRINGS.add("4");
+        assertEquals(4, WITH_STRINGS.size());
     }
 
     @Test
@@ -51,6 +55,15 @@ class DoublyLinkedListTest {
         }
 
         @Test
+        void iterativeAppendToEnd() {
+            for (int i = 0; i < 5; i++) {
+                EMPTY.add("object"+i);
+            }
+
+            assertEquals(new DoublyLinkedList(List.of("object0", "object1", "object2", "object3", "object4")), EMPTY);
+        }
+
+        @Test
         void addTypesToList() {
             EMPTY.add(1);
             EMPTY.add(1d);
@@ -59,7 +72,6 @@ class DoublyLinkedListTest {
             EMPTY.add('1');
             EMPTY.add("1");
             EMPTY.add(true);
-            EMPTY.add(null);
 
             assertEquals(new DoublyLinkedList(List.of(
                     1,
@@ -68,8 +80,7 @@ class DoublyLinkedListTest {
                     (byte) 1,
                     '1',
                     "1",
-                    true,
-                    null
+                    true
             )), EMPTY);
 
 
@@ -80,18 +91,10 @@ class DoublyLinkedListTest {
     class AddIndex {
         @Test
         void addToEmptyListWithIndex0() {
-            EMPTY.add(0, "object");
+            EMPTY.add("1");
+            EMPTY.add(0, "0.5");
 
-            assertEquals(new DoublyLinkedList(List.of("object")), EMPTY);
-        }
-
-        @Test
-        void iterativeAppendToEnd() {
-            for (int i = 0; i < 5; i++) {
-                EMPTY.add(i, "object"+i);
-            }
-
-            assertEquals(new DoublyLinkedList(List.of("object0", "object1", "object2", "object3", "object4")), EMPTY);
+            assertEquals(new DoublyLinkedList(List.of("0.5", "1")), EMPTY);
         }
 
         @Test
@@ -104,7 +107,7 @@ class DoublyLinkedListTest {
         @Test
         void addToNonExistentIndex() {
             assertThrows(IndexOutOfBoundsException.class, () -> {
-               EMPTY.add(1, "object");
+               EMPTY.add(0, "object");
             });
 
             assertThrows(IndexOutOfBoundsException.class, () -> {
@@ -119,8 +122,8 @@ class DoublyLinkedListTest {
 
     @Test
     void toArray() {
-        assertEquals(new Object[0], EMPTY.toArray());
-        assertEquals(new Object[] { "1", "2", "3" }, WITH_STRINGS);
+        assertArrayEquals(new Object[0], EMPTY.toArray());
+        assertArrayEquals(new Object[] { "1", "2", "3" }, WITH_STRINGS.toArray());
     }
 
     @Test
@@ -148,7 +151,7 @@ class DoublyLinkedListTest {
 
     @Test
     void testContainsWithNonExistentObject() {
-        assertTrue(WITH_STRINGS.contains("42"));
+        assertFalse(WITH_STRINGS.contains("42"));
     }
 
     @Nested
@@ -174,21 +177,21 @@ class DoublyLinkedListTest {
             WITH_STRINGS.removeAt(2);
             WITH_STRINGS.removeAt(0);
 
-            assertEquals(new DoublyLinkedList(List.of("1")), WITH_STRINGS);
+            assertEquals(new DoublyLinkedList(List.of("2")), WITH_STRINGS);
         }
 
         @Test
         void removeAtInvalidIndices() {
             assertThrows(IndexOutOfBoundsException.class, () -> {
-                EMPTY.remove(1);
+                EMPTY.removeAt(1);
             });
 
             assertThrows(IndexOutOfBoundsException.class, () -> {
-                WITH_STRINGS.remove(3);
+                WITH_STRINGS.removeAt(3);
             });
 
             assertThrows(IndexOutOfBoundsException.class, () -> {
-                WITH_STRINGS.remove(-1);
+                WITH_STRINGS.removeAt(-1);
             });
         }
     }
@@ -197,7 +200,7 @@ class DoublyLinkedListTest {
     class Remove {
         @Test
         void removeMiddleObject() {
-            WITH_STRINGS.remove("1");
+            WITH_STRINGS.remove("2");
 
             assertEquals(new DoublyLinkedList(List.of("1", "3")), WITH_STRINGS);
         }
@@ -213,10 +216,10 @@ class DoublyLinkedListTest {
 
         @Test
         void removeEdges() {
-            assertTrue(WITH_STRINGS.remove(2));
-            assertTrue(WITH_STRINGS.remove(0));
+            assertTrue(WITH_STRINGS.remove("3"));
+            assertTrue(WITH_STRINGS.remove("1"));
 
-            assertEquals(new DoublyLinkedList(List.of("1")), WITH_STRINGS);
+            assertEquals(new DoublyLinkedList(List.of("2")), WITH_STRINGS);
         }
 
         @Test
@@ -233,8 +236,15 @@ class DoublyLinkedListTest {
 
     @Test
     void set() {
-        WITH_STRINGS.set(0, null);
+        WITH_STRINGS.set(0, "42");
 
-        assertEquals(new DoublyLinkedList(List.of(null, "2", "3")), WITH_STRINGS);
+        assertEquals(new DoublyLinkedList(List.of("42", "2", "3")), WITH_STRINGS);
+    }
+
+    @Test
+    void setWithInvalidIndex() {
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            WITH_STRINGS.set(3, null);
+        });
     }
 }

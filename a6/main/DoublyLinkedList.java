@@ -1,6 +1,4 @@
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Doppelt verkette Kette. Es können beliebige Objekte hinzugefügt werden, dabei zeigt aber immer Objekt auf einen
@@ -26,11 +24,22 @@ public class DoublyLinkedList {
     }
 
     /**
-     * Erstellt eine Doppelt Verkettete Liste mit bereits bekannten Objekten.
+     * Erstellt eine Doppelt Verkettete Liste mit bereits bekannten Objekten. Die Objekte in der Kollektion dürfen
+     * nicht null sein.
      * @param col Start objekte
      */
     public DoublyLinkedList(Collection<Object> col) {
-        throw new RuntimeException("Not implemented");
+        this.n = col.size();
+        this.head = new Node();
+        Iterator<Object> iterator = col.iterator();
+        Node prev = this.head;
+        while (iterator.hasNext()) {
+            Node next = new Node(iterator.next(), null, prev);
+            prev.succ = next;
+            prev = next;
+        }
+        this.tail = new Node(null, null, prev);
+        prev.succ = tail;
     }
 
     /**
@@ -38,7 +47,7 @@ public class DoublyLinkedList {
      * @return anzahl von Elemente in der Liste
      */
     public int size() {
-        throw new RuntimeException("Not implemented");
+        return n;
     }
 
     /**
@@ -46,7 +55,7 @@ public class DoublyLinkedList {
      * @return wenn Anzahl Elemente = 0 true, ansonsten false
      */
     public boolean isEmpty() {
-        throw new RuntimeException("Not implemented");
+        return n == 0;
     }
 
     /**
@@ -55,7 +64,8 @@ public class DoublyLinkedList {
      * @return true wenn Operation beendet
      */
     public boolean add(Object o) {
-        throw new RuntimeException("Not implemented");
+        addBetween(tail.pred, o, tail);
+        return true;
     }
 
     /**
@@ -64,7 +74,8 @@ public class DoublyLinkedList {
      * @param o hinzufügendes Objekt
      */
     public void add(int index, Object o) {
-        throw new RuntimeException("Not implemented");
+        final Node node = getNodeAt(index);
+        addBetween(node.pred, o, node);
     }
 
     /**
@@ -72,15 +83,16 @@ public class DoublyLinkedList {
      * @return Array mit allen Elementen
      */
     public Object[] toArray() {
-        throw new RuntimeException("Not implemented");
-    }
+        Object[] objects = new Object[n];
 
-    /**
-     * Erzeugt eine lesbare Darstellung der Inhalte der Liste
-     * @return lesbare Darstellung
-     */
-    public String toString() {
-        throw new RuntimeException("Not implemented");
+        Node current = head;
+        int index = 0;
+        while (Objects.nonNull(current)) {
+            if (!current.isGuardianNode())
+                objects[index++] = current.content;
+            current = current.succ;
+        }
+        return objects;
     }
 
     /**
@@ -89,7 +101,7 @@ public class DoublyLinkedList {
      * @return position des ersten Vorkommens, wenn nicht gefunden -1
      */
     public int indexOf(Object o) {
-        throw new RuntimeException("Not implemented");
+        return getNodeIndex(o);
     }
 
     /**
@@ -98,7 +110,7 @@ public class DoublyLinkedList {
      * @return true wenn Objekt in Liste vorhanden, ansonsten false
      */
     public boolean contains(Object o) {
-        throw new RuntimeException("Not implemented");
+        return getNodeIndex(o) > 0;
     }
 
     /**
@@ -107,7 +119,9 @@ public class DoublyLinkedList {
      * @return gelöschtes Objekt
      */
     public Object removeAt(int index) {
-        throw new RuntimeException("Not implemented");
+        final Node nodeToRemove = getNodeAt(index);
+        removeBetween(nodeToRemove.pred, nodeToRemove, nodeToRemove.succ);
+        return nodeToRemove;
     }
 
     /**
@@ -117,7 +131,12 @@ public class DoublyLinkedList {
      * @return wenn Objekt gelöscht true, ansonsten false
      */
     public boolean remove(Object o) {
-        throw new RuntimeException("Not implemented");
+        final Node nodeToRemove = getNode(o);
+        if (Objects.nonNull(nodeToRemove)) {
+            removeBetween(nodeToRemove.pred, nodeToRemove, nodeToRemove.succ);
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -126,7 +145,11 @@ public class DoublyLinkedList {
      * @return gefundenes Objekt
      */
     public Object get(int index) {
-        throw new RuntimeException("Not implemented");
+        final Node node = getNodeAt(index);
+        if (Objects.nonNull(node)) {
+            return node.content;
+        }
+        return null;
     }
 
     /**
@@ -135,7 +158,65 @@ public class DoublyLinkedList {
      * @param o zu ersetzendes Objekt
      */
     public void set(int index, Object o) {
-        throw new RuntimeException("Not implemented");
+        final Node node = getNodeAt(index);
+        node.content = o;
+    }
+
+    private Node getNodeAt(int index) {
+        if (!(0 <= index && index < n)) throw new IndexOutOfBoundsException("Illegal index");
+        Node current = head;
+        int currentIndex = 0;
+        while (Objects.nonNull(current)) {
+            if (!current.isGuardianNode()) {
+                if (index == currentIndex++) {
+                    return current;
+                }
+            }
+            current = current.succ;
+        }
+        return null;
+    }
+
+    private int getNodeIndex(Object objectToSearch) {
+        Node current = head;
+        int index = 0;
+        while (Objects.nonNull(current)) {
+            if (!current.isGuardianNode()) {
+                if (current.content.equals(objectToSearch)) return index;
+                index++;
+            }
+            current = current.succ;
+        }
+        return -1;
+    }
+
+    private Node getNode(Object objectToSearch) {
+        Node current = head;
+        while (Objects.nonNull(current)) {
+            if (!current.isGuardianNode()) {
+                if (current.content.equals(objectToSearch)) return current;
+            }
+            current = current.succ;
+        }
+        return null;
+    }
+
+    private void addBetween(Node pred, Object obj, Node succ) {
+        Node nodeToAdd = new Node(obj, succ, pred);
+        pred.succ = nodeToAdd;
+        succ.pred = nodeToAdd;
+
+        n++;
+    }
+
+    private void removeBetween(Node pred, Node nodeToRemove, Node succ) {
+        nodeToRemove.pred = null;
+        nodeToRemove.succ = null;
+
+        pred.succ = succ;
+        succ.pred = pred;
+
+        n--;
     }
 
     private static class Node {
@@ -160,18 +241,46 @@ public class DoublyLinkedList {
             this.succ = succ;
             this.pred = pred;
         }
+
+        boolean isGuardianNode() {
+            return Objects.isNull(succ) || Objects.isNull(pred);
+        }
+
+        @Override
+        public String toString() {
+            return content.toString();
+        }
     }
 
+    /**
+     * Vergleicht die gegebene mit der aktuellen
+     * @param o zu vergleichende Liste
+     * @return wenn Liste identisch true, ansonsten false
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        DoublyLinkedList that = (DoublyLinkedList) o;
-        return n == that.n && Objects.equals(head, that.head) && Objects.equals(tail, that.tail);
+        DoublyLinkedList compare = (DoublyLinkedList) o;
+        if (compare.size() != size()) return false;
+        return Arrays.deepEquals(compare.toArray(), toArray());
     }
 
+    /**
+     * Erzeugt eine lesbare Darstellung der Inhalte der Liste
+     * @return lesbare Darstellung
+     */
+    @Override
+    public String toString() {
+        return Arrays.toString(toArray());
+    }
+
+    /**
+     * Liefert eine aktuellen Hashcode basierend auf die Liste
+     * @return hash code
+     */
     @Override
     public int hashCode() {
-        return Objects.hash(head, tail, n);
+        return Objects.hash(toArray());
     }
 }
