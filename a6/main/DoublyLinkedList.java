@@ -121,7 +121,7 @@ public class DoublyLinkedList {
     public Object removeAt(int index) {
         final Node nodeToRemove = getNodeAt(index);
         removeBetween(nodeToRemove.pred, nodeToRemove, nodeToRemove.succ);
-        return nodeToRemove;
+        return nodeToRemove.content;
     }
 
     /**
