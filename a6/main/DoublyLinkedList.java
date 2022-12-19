@@ -31,13 +31,14 @@ public class DoublyLinkedList {
     public DoublyLinkedList(Collection<Object> col) {
         this.n = col.size();
         this.head = new Node();
-        Iterator<Object> iterator = col.iterator();
         Node prev = this.head;
-        while (iterator.hasNext()) {
-            Node next = new Node(iterator.next(), null, prev);
+        // create the nodes between head and tail
+        for (Object obj : col) {
+            Node next = new Node(obj, null, prev);
             prev.succ = next;
             prev = next;
         }
+        // ensure that the nodes created from col point to the tail and reverse
         this.tail = new Node(null, null, prev);
         prev.succ = tail;
     }
@@ -74,6 +75,9 @@ public class DoublyLinkedList {
      * @param o hinzufügendes Objekt
      */
     public void add(int index, Object o) {
+        // erzwingt korrekten index
+        ensureCorrectIndex(index);
+
         final Node node = getNodeAt(index);
         addBetween(node.pred, o, node);
     }
@@ -119,6 +123,9 @@ public class DoublyLinkedList {
      * @return gelöschtes Objekt
      */
     public Object removeAt(int index) {
+        // ensures correct index
+        ensureCorrectIndex(index);
+
         final Node nodeToRemove = getNodeAt(index);
         removeBetween(nodeToRemove.pred, nodeToRemove, nodeToRemove.succ);
         return nodeToRemove.content;
@@ -145,6 +152,9 @@ public class DoublyLinkedList {
      * @return gefundenes Objekt
      */
     public Object get(int index) {
+        // ensures correct index
+        ensureCorrectIndex(index);
+
         final Node node = getNodeAt(index);
         if (Objects.nonNull(node)) {
             return node.content;
@@ -158,12 +168,14 @@ public class DoublyLinkedList {
      * @param o zu ersetzendes Objekt
      */
     public void set(int index, Object o) {
+        // ensures correct index
+        ensureCorrectIndex(index);
+
         final Node node = getNodeAt(index);
         node.content = o;
     }
 
     private Node getNodeAt(int index) {
-        if (!(0 <= index && index < n)) throw new IndexOutOfBoundsException(String.format("Invalid Index %d for List with size %d", index, n));
         Node current = head;
         int currentIndex = 0;
         while (Objects.nonNull(current)) {
@@ -217,6 +229,12 @@ public class DoublyLinkedList {
         succ.pred = pred;
 
         n--;
+    }
+
+    private void ensureCorrectIndex(int index) {
+        if (!(0 <= index && index < n)) {
+            throw new IndexOutOfBoundsException(String.format("Invalid Index %d for List with size %d", index, n));
+        }
     }
 
     private static class Node {
