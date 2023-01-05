@@ -18,21 +18,15 @@ public class RecursiveCollections {
         for (Object obj : col) {
             if (obj instanceof Collection<?>) {
                 collectAllAtLeastOneNumber((Collection<?>) obj, collectionsWithInteger);
+            } else if (isInteger(obj)) {
+                collectionsWithInteger.add(col);
             }
-        }
-        if (collectionContainsInteger(col)) {
-            collectionsWithInteger.add(col);
         }
         return collectionsWithInteger;
     }
 
-    private static boolean collectionContainsInteger(Collection<?> col) {
-        for (Object obj : col) {
-            if (obj instanceof Integer) {
-                return true;
-            }
-        }
-        return false;
+    private static boolean isInteger(Object obj) {
+        return obj instanceof Integer;
     }
 
     /**
